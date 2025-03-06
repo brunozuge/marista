@@ -665,6 +665,21 @@
                 alert('Logout realizado com sucesso.');
             }
         });
+        
+        // Inicializa a tela
+        renderActivities();
+        
+        // Atualização periódica
+        setInterval(() => {
+            // Aqui seria feita a requisição AJAX para obter dados atualizados
+            // Por enquanto, apenas atualizamos a hora do último update
+            activities.forEach(activity => {
+                if (activity.status === 'active') {
+                    activity.lastUpdate = new Date().toISOString();
+                }
+            });
+            renderActivities();
+        }, 60000); // Atualiza a cada 1 minuto
 
         // Chave para armazenar os dados no localStorage
 const STORAGE_KEY = "marista_activities";
@@ -741,21 +756,6 @@ function saveActivity(event) {
 loadActivities();
 renderActivities();
 
-        
-        // Inicializa a tela
-        renderActivities();
-        
-        // Atualização periódica
-        setInterval(() => {
-            // Aqui seria feita a requisição AJAX para obter dados atualizados
-            // Por enquanto, apenas atualizamos a hora do último update
-            activities.forEach(activity => {
-                if (activity.status === 'active') {
-                    activity.lastUpdate = new Date().toISOString();
-                }
-            });
-            renderActivities();
-        }, 60000); // Atualiza a cada 1 minuto
     </script>
 </body>
 </html>
